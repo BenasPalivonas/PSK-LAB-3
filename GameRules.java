@@ -5,7 +5,7 @@ import main.tetriminoes.*;
 import java.util.ArrayList;
 public class GameRules implements IGameRules {
     private final IBoard x;
-    private final int tetrimino;
+    private final int zvb;
     public GameRules(IBoard x) {
         this.board = x;
     }
@@ -77,14 +77,14 @@ public class GameRules implements IGameRules {
         for (int i = 0; i < Coordinates.size(); i++) {
             int blockX = BlockCoords[Orientation][i][0];
              int blockY = BlockCoords[Orientation][i][1];
-              if (blockX + HighestX >= board.getBoardHeight() || blockY + LowestY >= board.getBoardWidth()) {
+              if (blockX + HighestX >= x.getBoardHeight() || blockY + LowestY >= x.getBoardWidth()) {
                 a = false;
             }
-            if (board.getElement(new Coordinates(blockX + highestX, blockY + LowestY)) != null) {
+            if (x.getElement(new Coordinates(blockX + highestX, blockY + LowestY)) != null) {
                 a= false;
              }
         }
-          returnanswer=true;
+          a=true;
           return a;
     }
 }
