@@ -4,10 +4,10 @@ import main.Interfaces.IGameRules;
 import main.tetriminoes.*;
 import java.util.ArrayList;
 public class GameRules implements IGameRules {
-    private final IBoard lenta;
+    private final IBoard x;
     private final int tetrimino;
-    public GameRules(IBoard lenta) {
-        this.board = lenta;
+    public GameRules(IBoard x) {
+        this.board = x;
     }
     // inits random tetrimino
     public Tetrimino initRandomTetrimino() {
@@ -52,7 +52,7 @@ public class GameRules implements IGameRules {
     }
     public boolean HasFallen(Tetrimino tetrimino) {
         for (Coordinates coordinate : tetrimino.getCoordinates()) {
-            if (coordinate.getX() == board.getBoardHeight() - 1 || board.getNextElement(coordinate) == TetriminoType.tetriminoFallen) {
+            if (coordinate.getX() == x.getBoardHeight() - 1 || x.getNextElement(coordinate) == TetriminoType.tetriminoFallen) {
                     tetrimino.setFallen();
                 return true;
             }
@@ -61,7 +61,7 @@ public class GameRules implements IGameRules {
     }
     public boolean move(ArrayList<Coordinates> coordinates, int x, int y) {
         for (Coordinates coordinate : coordinates) {
-            if (coordinate.getX() + x >= board.getBoardHeight() || coordinate.getY() + y < 0 || coordinate.getY() + y >= board.getBoardWidth() || board.getElement(new Coordinates(coordinate.getX() + x, coordinate.getY() + y)) != null) {
+            if (coordinate.getX() + x >= x.getBoardHeight() || coordinate.getY() + y < 0 || coordinate.getY() + y >= x.getBoardWidth() || x.getElement(new Coordinates(coordinate.getX() + x, coordinate.getY() + y)) != null) {
                   return false;
             }
         }
@@ -73,18 +73,18 @@ public class GameRules implements IGameRules {
             int Orientation = tetrimino.getOrientation();
         int HighestX = tetrimino.getHighestX(coordinates);
            int LowestY = tetrimino.getLowestY(coordinates);
-           boolean returnanswer;
+           boolean a;
         for (int i = 0; i < Coordinates.size(); i++) {
             int blockX = BlockCoords[Orientation][i][0];
              int blockY = BlockCoords[Orientation][i][1];
               if (blockX + HighestX >= board.getBoardHeight() || blockY + LowestY >= board.getBoardWidth()) {
-                returnanswer = false;
+                a = false;
             }
             if (board.getElement(new Coordinates(blockX + highestX, blockY + LowestY)) != null) {
-                returnanswer= false;
+                a= false;
              }
         }
           returnanswer=true;
-          return returnanswer;
+          return a;
     }
 }
